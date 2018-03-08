@@ -1,0 +1,37 @@
+如果css文件中出现@import，则有两种处理方式，一种是将postcss文件单独写成配置文件postcss.config.js
+//webpack.config.js
+{
+	test:/\.css$/,
+	use:[	'style-loader',
+			{
+				loader: 'css-loader',
+				options: {importLoaders: 1}
+			},
+			'postcss-loader'
+		]
+}
+//postcss.config.js
+module.exports = {
+ plugins:[require('autoprefixer')]
+}
+
+另一种需要安装postcss-import插件
+npm install postcss-import
+//webpack.config.js
+{
+	test:/\.css$/,
+	use:[ 'style-loader',
+			{	loader: 'css-loader',
+				options: {importLoaders: 1 }
+			},
+			{
+				loader: 'postcss-loader',
+				options: {
+						plugins: [
+							require('postcss-import'),
+							require('autoprefixer')
+						]
+				}
+			}
+		]
+}

@@ -1,0 +1,6 @@
+静态HTML模板如何添加到打包后的index.html
+利用webpack的loader: html-loader,
+1)在源文件中写好要加入的模板文件，比如：layer.html
+2)在源文件中写一个js，引入模板文件、样式，将有样式的模板文件作为对象导出
+3)在app.js（核心逻辑文件）中引入源文件中的js及公共样式库，利用innerHTML将模板加入到index.html
+4)执行npm run webpack 执行打包，使用浏览器打开打包文件夹下的index.html,即可看到打包后的结果

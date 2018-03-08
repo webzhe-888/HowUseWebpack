@@ -1,0 +1,44 @@
+如果css文件中出现@import，则有两种处理方式，一种是将postcss文件单独写成配置文件postcss.config.js
+//webpack.config.js
+{
+	test:/\.css$/,
+	use:[	'style-loader',
+			{
+				loader: 'css-loader',
+				options: {importLoaders: 1}
+			},
+			'postcss-loader'
+		]
+}
+//postcss.config.js
+module.exports = {
+ plugins:[require('autoprefixer')]
+}
+
+另一种需要安装postcss-import插件
+npm install postcss-import
+//webpack.config.js
+{
+	test:/\.css$/,
+	use:[ 'style-loader',
+			{	loader: 'css-loader',
+				options: {importLoaders: 1 }
+			},
+			{
+				loader: 'postcss-loader',
+				options: {
+						plugins: [
+							require('postcss-import'),
+							require('autoprefixer')
+						]
+				}
+			}
+		]
+}
+
+
+//已经用npm安装了node-sass和sass-loader，但是执行npm run webpack  会出现以下问题
+MSBUILD : error MSB3428: 未能加载 Visual C++ 组件“VCBuild.exe”。要解决此问题，1) 安装 .NET Framework 2.0 SDK；
+2) 安装 Microsoft Visual Studio 2005；或 3) 如果将该组件安装到了其他位置，请将其位置添加到系统路径
+
+这是因为系统问题，Windows专业版有此问题，旗舰版就没有

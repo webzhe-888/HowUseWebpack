@@ -1,0 +1,16 @@
+@import "./flex.css";
+
+html,body{
+    padding:0;
+    margin:0;
+    background-color: pink;
+}
+ul,li{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+/* 提取出来成为单独的css文件，通过import引入
+.flex-div{
+    display: flex;
+}*/

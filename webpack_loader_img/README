@@ -1,0 +1,18 @@
+webpack中关于图片的出现主要有三种情况：
+1)在根部的HTML文件中，即最顶层的HTML，以img标签出现；
+2)在css中，作为背景需要的图片;
+3)在源文件中的的模板文件，即HTML文件或layer.tpl文件中，以img标签出现；
+
+主要利用file-loader，但是:
+1、在HTML中引用图片时，使用绝对路径是完全ok的;
+2、但是在源文件中的模板文件中使用相对路径，就会打包之后路径加载不进去，出现打包后的图片找不到的问题
+解决办法是使用  用${require("../../assets/aaa.jpg" )}替换
+'../../assets/aaa.jpg'
+
+安装url-loader
+url-loader和file-loader相似，但是url-loader可以指定limit参数。
+（1）终端目标文件输入：npm install url-loader --save-dev
+url-loader可以处理文件或者图片，当文件/图片大小大于指定的limit,就会丢给filel-loader去处理，
+当小于设定的limit，就会转为base64编码，不再是一个url(不再是一个http请求)，图片会被打包进html,css,js
+（2）两种图片引用方式：①通过http请求load进来。浏览器会有缓存，比较适用于重复性较高的图片。
+②打包成base64。任何地方要用时，都会有base64编码存在那里，会造成代码的冗余，增加代码的体积。
